@@ -1,0 +1,40 @@
+.pixel-table__wrapper {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+}
+.pixel-table__wrapper .pixel-table {
+    width: 100%;
+    min-width: 100%;
+    border-collapse: collapse;
+    border: 1px solid hsl(0, 0%, 80%);
+}
+.pixel-table__wrapper .pixel-table .pixel-table__cell, .pixel-table__wrapper .pixel-table .pixel-table__heading {
+    text-align: left;
+}
+.pixel-table__wrapper .pixel-table .pixel-table__row {
+    border: 1px solid hsl(0, 0%, 80%);
+}
+.pixel-table__wrapper .pixel-table .pixel-table__row:hover {
+    background-color: #f7f7f7;
+}
+.pixel-table__wrapper .pixel-table .pixel-table__row--selected:hover {
+    background-color: #bae0ff;
+}
+.pixel-table__wrapper .pixel-table .pixel-table__row:first-child {
+    border: 1px solid hsl(0, 0%, 80%);
+}
+.pixel-table__wrapper .pixel-table .pixel-table__cell {
+    padding: 0.6rem;
+}
+.pixel-table__wrapper .pixel-table .pixel-table__heading {
+    padding: 0.8rem 0.6rem;
+}
+.pixel-table__wrapper .pixel-table .pixel-table__headingCheckboxCell {
+    padding: 0.8rem 0.8rem 0.8rem 1.2rem;
+}
+.pixel-table__wrapper .pixel-table .pixel-table__checkboxCell {
+    padding: 0.6rem 0.6rem 0.6rem 1.2rem;
+}
+.pixel-table__wrapper .pixel-table .pixel-table__row--selected {
+    background-color: #e6f4ff;
+}

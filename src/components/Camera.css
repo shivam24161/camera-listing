@@ -1,0 +1,85 @@
+.pixel-search__container h4{
+    font-size: 2.4rem;
+    line-height: 3.6rem;
+}
+.pixel-search__container p{
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+}
+.pixel-search__container input{
+    font-size: 1.4rem;
+    line-height: 2rem;
+    padding: 0.8rem 1.2rem;
+    border-radius: 0.6rem;
+    border: 1px solid hsl(0, 0%, 80%);
+}
+.pixel-status {
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.6rem;
+    border: 1px solid silver;
+}
+.status-active {
+    color: green;
+}
+.status-inactive {
+    color: red;
+}
+.pixel-select-filter {
+    display: flex;
+    gap: 1.2rem;
+}
+.pixel-select-filter .react-select {
+    width: 200px;
+}
+.pixel-search__container {
+    display: flex;
+    gap: 1.6rem;
+    justify-content: space-between;
+}
+.pixel-pagination {
+    display: flex;
+    gap: 1.6rem;
+    align-items: center;
+    justify-content: flex-end;
+}
+.pixel-table__container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+.pixel-table__pagContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+.pixel-search__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+.pixel-item__name {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.pixel-camera__online .camera-status {
+    background-color: rgb(6, 125, 6)
+}
+.pixel-camera__offline .camera-status {
+    background-color: rgb(243, 19, 19);
+}
+.camera-status {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+} 
+.pixel-health__wrapper {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+}
+.pixel-health-1 , .pixel-health-2{
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+}
