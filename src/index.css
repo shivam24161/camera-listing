@@ -1,17 +1,22 @@
 :root {
   font-size: 62.5%;
+  --app-bg-color: #f8f8f8;
+  --font-color: #9c9c9c;
 }
 
 body,
 p {
   font-size: 1.6rem;
   line-height: 2.4rem;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 *,
 :after,
 :before {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 p,h1,h2,h3,h4,h5,h6 {

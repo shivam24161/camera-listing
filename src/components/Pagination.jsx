@@ -52,9 +52,6 @@ const Pagination = () => {
           {start + 1} - {end > data?.length ? data.length : end} of{" "}
           {data.length}
         </span>
-        <button>
-          <ChevronsLeft size={20} />
-        </button>
         <button
           onClick={() => handlePagePrev()}
           disabled={selectedCount > start}
@@ -66,9 +63,6 @@ const Pagination = () => {
           disabled={start + 1 + selectedCount > data.length}
         >
           <ChevronRight size={20} />
-        </button>
-        <button>
-          <ChevronsRight size={20} />
         </button>
       </div>
     </div>

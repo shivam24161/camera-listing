@@ -58,7 +58,10 @@ const Table = (props) => {
             )}
             {headings.map((ele) => {
               return (
-                <th key={ele.title} className="pixel-table__heading">
+                <th
+                  key={ele?.id ? ele.id : ele.title}
+                  className="pixel-table__heading"
+                >
                   <div className="flex gap-8 justify-between align-center">
                     <span>{ele.title}</span>
                   </div>

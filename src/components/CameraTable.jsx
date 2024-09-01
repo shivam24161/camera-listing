@@ -8,6 +8,7 @@ import Pagination from "./Pagination";
 import { Cloud, Info, Slash, Smartphone } from "react-feather";
 import Progress from "../utilities/Progress/Progress";
 import { useRowSelection } from "../utilities/Table/useRowSelection";
+import TableSkelton from "./TableSkelton";
 import "./Camera.css";
 
 const CameraTable = () => {
@@ -20,9 +21,9 @@ const CameraTable = () => {
     count: { start, end },
   } = useContext(MyContext);
   const [locationData, setLocationData] = useState([]);
-
-  const { selectedRows, allRowsSelected, handleSelectionChange } =
-    useRowSelection(data?.slice(start, end));
+  const { selectedRows, handleSelectionChange } = useRowSelection(
+    data?.slice(start, end)
+  );
 
   const fetchApi = async () => {
     setLoading(true);
@@ -64,7 +65,11 @@ const CameraTable = () => {
 
   const tableRow = data?.slice(start, end)?.map((item, ind) => {
     return (
-      <Table.Row key={item.id} id={item.id} selected={selectedRows.includes(item.id)}>
+      <Table.Row
+        key={item.id}
+        id={item.id}
+        selected={selectedRows.includes(item.id)}
+      >
         <Table.Cell>
           <div
             className={classnames({
@@ -160,7 +165,7 @@ const CameraTable = () => {
       <SelectFilters locationData={locationData} />
       <div>
         {loading ? (
-          "Loading..."
+          <TableSkelton />
         ) : (
           <div className="pixel-table__pagContainer">
             <Table
