@@ -1,6 +1,7 @@
 import React from "react";
 import CameraList from "./components/CameraList";
-import './App.css';
+import { ToastContainer } from "react-toastify";
+import "./App.css";
 
 const App = () => {
   return (
@@ -9,6 +10,7 @@ const App = () => {
         <img src="https://wobot.ai/wobot_logo_blue.svg" />
       </div>
       <CameraList />
+      <ToastContainer />
     </div>
   );
 };
