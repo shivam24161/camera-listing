@@ -30,6 +30,7 @@
     max-width: 70px;
     font-size: 1.2rem;
     text-align: center;
+    cursor: pointer;
 }
 .status-active {
     color: #085408;

@@ -5,7 +5,7 @@ import { MyContext } from "../context/Context";
 import { classnames } from "../utilities/GlobalFunc/GlobalFunc";
 import SelectFilters from "./SelectFilters";
 import Pagination from "./Pagination";
-import { CheckCircle, Cloud, Info, Slash, Smartphone } from "react-feather";
+import { CheckCircle, Cloud, Info, Smartphone, Trash2 } from "react-feather";
 import Progress from "../utilities/Progress/Progress";
 import { useRowSelection } from "../utilities/Table/useRowSelection";
 import TableSkelton from "./TableSkelton";
@@ -79,6 +79,10 @@ const CameraTable = () => {
     fetchApi();
   };
 
+  const handleRowDeletion = (id) => {
+    const filteredData = data.filter((item) => item.id !== id);
+    setData(filteredData);
+  };
   const tableRow = data?.slice(start, end)?.map((item, ind) => {
     return (
       <Table.Row
@@ -133,7 +137,9 @@ const CameraTable = () => {
         </Table.Cell>
         <Table.Cell>{item?.location}</Table.Cell>
         <Table.Cell>{item?.recorder === "" ? "N/A" : item.recorder}</Table.Cell>
-        <Table.Cell><span className="pixel-task">{`${item?.tasks} Tasks`}</span></Table.Cell>
+        <Table.Cell>
+          <span className="pixel-task">{`${item?.tasks} Tasks`}</span>
+        </Table.Cell>
         <Table.Cell>
           <div
             className={classnames({
@@ -141,36 +147,24 @@ const CameraTable = () => {
               "status-active": item?.status === "Active",
               "status-inactive": item?.status === "Inactive",
             })}
+            onClick={() =>
+              item?.status === "Active"
+                ? handleCameraStatus(item?.id, "Inactive")
+                : handleCameraStatus(item?.id, "Active")
+            }
+            title="update status"
           >
             {item?.status}
           </div>
         </Table.Cell>
         <Table.Cell>
-          {item?.status === "Active" ? (
-            <button
-              className="pixel-action__icon"
-              onClick={() => handleCameraStatus(item?.id, "Inactive")}
-            >
-              <Slash size={16} color="rgb(243, 19, 19)" />
-            </button>
-          ) : (
-            <button
-              className="pixel-action__icon"
-              onClick={() => handleCameraStatus(item?.id, "Active")}
-            >
-              <svg
-                stroke="rgb(6, 125, 6)"
-                fill="rgb(6, 125, 6)"
-                strokeWidth="0"
-                viewBox="0 0 512 512"
-                height="16"
-                width="16"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z"></path>
-              </svg>
-            </button>
-          )}
+          <button
+            className="pixel-action__icon"
+            onClick={() => handleRowDeletion(item?.id)}
+            title="delete this row"
+          >
+            <Trash2 size={16} color="rgb(255,75,75)" />
+          </button>
         </Table.Cell>
       </Table.Row>
     );
