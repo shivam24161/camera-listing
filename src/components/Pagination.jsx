@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import ReactSelect from "react-select";
+import React, { useContext } from "react";
 import { MyContext } from "../context/Context";
 import {
   ChevronLeft,
@@ -9,51 +8,63 @@ import {
 } from "react-feather";
 
 const Pagination = () => {
-  const { data, setData, mainData } = useContext(MyContext);
-  const [count, setCount] = useState({
-    selectedCount: 10,
-    start: 1,
-    end: 10,
-  });
+  const {
+    data,
+    count: { start, end, selectedCount },
+    setCount,
+  } = useContext(MyContext);
+
+  const handlePageNext = () => {
+    setCount((count) => ({
+      ...count,
+      start: count.start + count.selectedCount,
+      end: count.end + count.selectedCount,
+    }));
+  };
+
+  const handlePagePrev = () => {
+    setCount((count) => ({
+      ...count,
+      start: count.start - count.selectedCount,
+      end: count.end - count.selectedCount,
+    }));
+  };
+
   return (
     <div className="pixel-pagination">
-      <ReactSelect
-        // value={count.selectedCount}
-        // defaultValue={count.selectedCount}
-        value={10}
-        defaultValue={10}
-        isSearchable={false}
-        options={[
-          {
-            label: 10,
-            value: 10,
-          },
-          {
-            label: 20,
-            value: 20,
-          },
-          {
-            label: 30,
-            value: 30,
-          },
-          {
-            label: 40,
-            value: 40,
-          },
-        ]}
-        menuPlacement="auto"
-      />
-      <div>
+      <select
+        value={selectedCount}
+        onChange={(e) =>
+          setCount(() => ({
+            start: 0,
+            end: Number(e.target.value),
+            selectedCount: Number(e.target.value),
+          }))
+        }
+      >
+        <option value={10}>10</option>
+        <option value={20}>20</option>
+        <option value={30}>30</option>
+        <option value={40}>40</option>
+      </select>
+      <div className="pixel-page__container">
         <span>
-          {count.start} - {count.end} of {data.length}
+          {start + 1} - {end > data?.length ? data.length : end} of{" "}
+          {data.length}
         </span>
         <button>
           <ChevronsLeft size={20} />
         </button>
-        <button>
+        <button
+          onClick={() => handlePagePrev()}
+          disabled={selectedCount > start}
+        >
           <ChevronLeft size={20} />
         </button>
-        <button>
+        <button
+          onClick={() => handlePageNext()}
+          disabled={start + 1 + selectedCount > data.length}
+        >
           <ChevronRight size={20} />
         </button>
         <button>

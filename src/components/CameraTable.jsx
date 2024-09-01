@@ -5,15 +5,24 @@ import { MyContext } from "../context/Context";
 import { classnames } from "../utilities/GlobalFunc/GlobalFunc";
 import SelectFilters from "./SelectFilters";
 import Pagination from "./Pagination";
-import { Cloud, Info, Smartphone } from "react-feather";
+import { Cloud, Info, Slash, Smartphone } from "react-feather";
 import Progress from "../utilities/Progress/Progress";
+import { useRowSelection } from "../utilities/Table/useRowSelection";
 import "./Camera.css";
 
 const CameraTable = () => {
   const { getList } = apiUrl;
   const [loading, setLoading] = useState(true);
-  const { data, setData, mainData, setMainData } = useContext(MyContext);
+  const {
+    data,
+    setData,
+    setMainData,
+    count: { start, end },
+  } = useContext(MyContext);
   const [locationData, setLocationData] = useState([]);
+
+  const { selectedRows, allRowsSelected, handleSelectionChange } =
+    useRowSelection(data?.slice(start, end));
 
   const fetchApi = async () => {
     setLoading(true);
@@ -53,9 +62,9 @@ const CameraTable = () => {
     fetchApi();
   };
 
-  const tableRow = data?.map((item, ind) => {
+  const tableRow = data?.slice(start, end)?.map((item, ind) => {
     return (
-      <Table.Row key={ind}>
+      <Table.Row key={item.id} id={item.id} selected={selectedRows.includes(item.id)}>
         <Table.Cell>
           <div
             className={classnames({
@@ -117,12 +126,28 @@ const CameraTable = () => {
         </Table.Cell>
         <Table.Cell>
           {item?.status === "Active" ? (
-            <button onClick={() => handleCameraStatus(item?.id, "Inactive")}>
-              InActive
+            <button
+              className="pixel-action__icon"
+              onClick={() => handleCameraStatus(item?.id, "Inactive")}
+            >
+              <Slash size={16} color="rgb(243, 19, 19)" />
             </button>
           ) : (
-            <button onClick={() => handleCameraStatus(item?.id, "Active")}>
-              Active
+            <button
+              className="pixel-action__icon"
+              onClick={() => handleCameraStatus(item?.id, "Active")}
+            >
+              <svg
+                stroke="rgb(6, 125, 6)"
+                fill="rgb(6, 125, 6)"
+                strokeWidth="0"
+                viewBox="0 0 512 512"
+                height="16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z"></path>
+              </svg>
             </button>
           )}
         </Table.Cell>
@@ -148,12 +173,12 @@ const CameraTable = () => {
                 { title: "STATUS" },
                 { title: "ACTION" },
               ]}
-              // selectable={true}
-              // onRowSelection={handleSelectionChange}
+              selectable={true}
+              onRowSelection={handleSelectionChange}
             >
               {tableRow}
             </Table>
-            <Pagination />
+            {data?.length > 10 && <Pagination />}
           </div>
         )}
       </div>
