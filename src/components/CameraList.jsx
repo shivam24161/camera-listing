@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import CameraTable from "./CameraTable";
 import { MyContext } from "../context/Context";
+import { Search } from "react-feather";
 
 const CameraList = () => {
   const [searchVal, setSearchVal] = useState("");
@@ -18,7 +19,7 @@ const CameraList = () => {
           <h4>Cameras</h4>
           <p>Manage your cameras here</p>
         </div>
-        <div>
+        <div className="pixel-inputBox">
           <input
             type="text"
             placeholder="Search by camera name"
@@ -28,6 +29,7 @@ const CameraList = () => {
               handleSearch(e.target.value);
             }}
           />
+          <Search size={16} color="currentColor"/>
         </div>
       </div>
       <CameraTable />
