@@ -5,10 +5,11 @@ import { MyContext } from "../context/Context";
 import { classnames } from "../utilities/GlobalFunc/GlobalFunc";
 import SelectFilters from "./SelectFilters";
 import Pagination from "./Pagination";
-import { Cloud, Info, Slash, Smartphone } from "react-feather";
+import { Check, CheckCircle, Cloud, Info, Slash, Smartphone } from "react-feather";
 import Progress from "../utilities/Progress/Progress";
 import { useRowSelection } from "../utilities/Table/useRowSelection";
 import TableSkelton from "./TableSkelton";
+import { toast } from "react-toastify";
 import "./Camera.css";
 
 const CameraTable = () => {
@@ -21,6 +22,18 @@ const CameraTable = () => {
     count: { start, end },
   } = useContext(MyContext);
   const [locationData, setLocationData] = useState([]);
+  const notify = (msg) =>
+    toast(msg, {
+      position: "bottom-center",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      icon:<CheckCircle size={16} color="#085408"/>
+    });
   const { selectedRows, handleSelectionChange } = useRowSelection(
     data?.slice(start, end)
   );
@@ -60,7 +73,9 @@ const CameraTable = () => {
       body: JSON.stringify(payload),
     });
     const result = await res.json();
-    console.log(result)
+    result.status === 200
+      ? notify("Status Updated")
+      : notify("Something went wrong");
     fetchApi();
   };
 
