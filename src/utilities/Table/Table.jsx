@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { classnames } from "../GlobalFunc/GlobalFunc";
 import "./Table.css";
 
 const Table = (props) => {
-  const {
-    headings,
-    children,
-    selectable,
-    onRowSelection,
-  } = props;
+  const { headings, children, selectable, onRowSelection } = props;
   const [selectAll, setSelectAll] = useState(false);
+  const checkboxRef = useRef();
 
   useEffect(() => {
     if (selectable && children && children.length > 0) {
       const isAllSelected = children.every((child) => child.props.selected);
-      isAllSelected ? setSelectAll(true) : handleIndeterminate();
+      if (isAllSelected) {
+        checkboxRef.current.indeterminate = false;
+        setSelectAll(true);
+      } else {
+        handleIndeterminate();
+      }
     }
   }, [children]);
 
@@ -33,9 +34,10 @@ const Table = (props) => {
   const handleIndeterminate = () => {
     const isIndermonate = children.some((child) => child.props.selected);
     if (isIndermonate) {
-      setSelectAll("indeterminate");
+      checkboxRef.current.indeterminate = true;
     } else {
       setSelectAll(false);
+      checkboxRef.current.indeterminate = false;
     }
   };
 
@@ -49,21 +51,16 @@ const Table = (props) => {
                 <input
                   type="checkbox"
                   onChange={handleSelectAll}
+                  ref={checkboxRef}
                   checked={selectAll}
                 />
               </td>
             )}
-            {headings.map((ele, ind) => {
+            {headings.map((ele) => {
               return (
-                <th
-                  key={ele.title}
-                  className={classnames({
-                    "pixel-table__heading": true,
-                  })}
-                >
+                <th key={ele.title} className="pixel-table__heading">
                   <div className="flex gap-8 justify-between align-center">
                     <span>{ele.title}</span>
-                  
                   </div>
                 </th>
               );

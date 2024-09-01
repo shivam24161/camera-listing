@@ -1,23 +1,21 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { MyContext } from "../context/Context";
 import ReactSelect from "react-select";
 
 const SelectFilters = (props) => {
   const { data, setData, mainData } = useContext(MyContext);
   const { locationData } = props;
-  const [selectedFilter, setSelectedFilter] = useState({
-    location: "",
-    status: "",
-  });
 
   const handleLocationFilter = (val) => {
     const filterData = mainData.filter((item) => item.location === val);
     setData(filterData);
   };
+
   const handleStatusFilter = (val) => {
     const filterData = mainData.filter((item) => item.status === val);
     setData(filterData);
   };
+
   return (
     <div className="pixel-select-filter">
       <ReactSelect
@@ -41,6 +39,7 @@ const SelectFilters = (props) => {
         ]}
         placeholder="Status"
         isClearable
+        isSearchable={false}
         onChange={(val) => {
           if (val) {
             handleStatusFilter(val?.value);
