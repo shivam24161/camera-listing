@@ -8,6 +8,16 @@ const Table = (props) => {
   const checkboxRef = useRef();
 
   useEffect(() => {
+    const handleIndeterminate = () => {
+      const isIndermonate = children.some((child) => child.props.selected);
+      if (isIndermonate) {
+        checkboxRef.current.indeterminate = true;
+      } else {
+        setSelectAll(false);
+        checkboxRef.current.indeterminate = false;
+      }
+    };
+
     if (selectable && children && children.length > 0) {
       const isAllSelected = children.every((child) => child.props.selected);
       if (isAllSelected) {
@@ -17,7 +27,7 @@ const Table = (props) => {
         handleIndeterminate();
       }
     }
-  }, [children]);
+  }, [children,selectable]);
 
   const handleSelectAll = () => {
     if (onRowSelection) {
@@ -28,16 +38,6 @@ const Table = (props) => {
         onRowSelection(allIds);
       }
       setSelectAll(!selectAll);
-    }
-  };
-
-  const handleIndeterminate = () => {
-    const isIndermonate = children.some((child) => child.props.selected);
-    if (isIndermonate) {
-      checkboxRef.current.indeterminate = true;
-    } else {
-      setSelectAll(false);
-      checkboxRef.current.indeterminate = false;
     }
   };
 

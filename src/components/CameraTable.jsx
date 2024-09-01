@@ -60,6 +60,7 @@ const CameraTable = () => {
       body: JSON.stringify(payload),
     });
     const result = await res.json();
+    console.log(result)
     fetchApi();
   };
 

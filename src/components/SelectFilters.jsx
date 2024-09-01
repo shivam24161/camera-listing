@@ -3,7 +3,7 @@ import { MyContext } from "../context/Context";
 import ReactSelect from "react-select";
 
 const SelectFilters = (props) => {
-  const { data, setData, mainData } = useContext(MyContext);
+  const { setData, mainData } = useContext(MyContext);
   const { locationData } = props;
 
   const handleLocationFilter = (val) => {

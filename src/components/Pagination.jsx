@@ -1,11 +1,6 @@
 import React, { useContext } from "react";
 import { MyContext } from "../context/Context";
-import {
-  ChevronLeft,
-  ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
-} from "react-feather";
+import { ChevronLeft, ChevronRight } from "react-feather";
 
 const Pagination = () => {
   const {
