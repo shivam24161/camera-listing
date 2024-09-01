@@ -5,7 +5,7 @@ import { MyContext } from "../context/Context";
 import { classnames } from "../utilities/GlobalFunc/GlobalFunc";
 import SelectFilters from "./SelectFilters";
 import Pagination from "./Pagination";
-import { Check, CheckCircle, Cloud, Info, Slash, Smartphone } from "react-feather";
+import { CheckCircle, Cloud, Info, Slash, Smartphone } from "react-feather";
 import Progress from "../utilities/Progress/Progress";
 import { useRowSelection } from "../utilities/Table/useRowSelection";
 import TableSkelton from "./TableSkelton";
@@ -32,7 +32,7 @@ const CameraTable = () => {
       draggable: true,
       progress: undefined,
       theme: "light",
-      icon:<CheckCircle size={16} color="#085408"/>
+      icon: <CheckCircle size={16} color="#085408" />,
     });
   const { selectedRows, handleSelectionChange } = useRowSelection(
     data?.slice(start, end)
