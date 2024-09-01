@@ -95,7 +95,7 @@ const CameraTable = () => {
             })}
           >
             <span className="camera-status"></span>
-            <span>{item?.name}</span>
+            <span className="pixel-camera-name">{item?.name}</span>
             {item?.hasWarning && <Info size={16} color="#ffa500" />}
           </div>
         </Table.Cell>
@@ -133,7 +133,7 @@ const CameraTable = () => {
         </Table.Cell>
         <Table.Cell>{item?.location}</Table.Cell>
         <Table.Cell>{item?.recorder === "" ? "N/A" : item.recorder}</Table.Cell>
-        <Table.Cell>{`${item?.tasks} Tasks`}</Table.Cell>
+        <Table.Cell><span className="pixel-task">{`${item?.tasks} Tasks`}</span></Table.Cell>
         <Table.Cell>
           <div
             className={classnames({

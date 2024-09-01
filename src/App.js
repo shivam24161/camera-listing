@@ -7,7 +7,7 @@ const App = () => {
   return (
     <div className="pixel-app">
       <div className="logo">
-        <img src="https://wobot.ai/wobot_logo_blue.svg" alt="logo"/>
+        <img src="https://wobot.ai/wobot_logo_blue.svg" alt="logo" width={120} height={50}/>
       </div>
       <CameraList />
       <ToastContainer />

@@ -13,6 +13,15 @@
     border-radius: 0.6rem;
     border: none;
     background-color: #f0f0f0;
+    padding-right: 3rem;
+}
+.pixel-inputBox {
+    position: relative;
+}
+.pixel-inputBox svg {
+    position: absolute;
+    right: 0.5rem;
+    top: 1rem;
 }
 .pixel-status {
     padding: 0.2rem 0.8rem;
@@ -46,6 +55,7 @@
 }
 .pixel-search__container {
     display: flex;
+    flex-wrap: wrap;
     gap: 1.6rem;
     justify-content: space-between;
 }
@@ -129,4 +139,7 @@
 .pixel-page__container button:not(:disabled):hover {
     background-color: #d2d2d2;
     border-radius: 0.6rem;
+}
+.pixel-camera-name ,.pixel-task{
+    white-space: pre;
 }
