@@ -5,7 +5,7 @@ import { Search } from "react-feather";
 
 const CameraList = () => {
   const [searchVal, setSearchVal] = useState("");
-  const { data, setData, mainData } = useContext(MyContext);
+  const { setData, mainData } = useContext(MyContext);
 
   const handleSearch = (val) => {
     const filterData = mainData.filter((item) => item.name.toLowerCase().includes(val.toLowerCase()));
