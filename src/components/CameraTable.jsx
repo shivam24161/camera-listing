@@ -24,12 +24,12 @@ const CameraTable = () => {
   const [locationData, setLocationData] = useState([]);
   const notify = (msg) =>
     toast(msg, {
-      position: "bottom-center",
+      position: "top-center",
       autoClose: 3000,
       hideProgressBar: true,
       closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
+      pauseOnHover: false,
+      draggable: false,
       progress: undefined,
       theme: "light",
       icon: <CheckCircle size={16} color="#085408" />,

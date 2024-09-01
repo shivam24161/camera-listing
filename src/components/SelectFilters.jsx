@@ -3,7 +3,7 @@ import { MyContext } from "../context/Context";
 import ReactSelect from "react-select";
 
 const SelectFilters = (props) => {
-  const { setData, mainData } = useContext(MyContext);
+  const { data, setData, mainData } = useContext(MyContext);
   const { locationData } = props;
 
   const handleLocationFilter = (val) => {
@@ -20,6 +20,7 @@ const SelectFilters = (props) => {
     <div className="pixel-select-filter">
       <ReactSelect
         className="react-select"
+        isLoading={data?.length === 0}
         options={locationData}
         placeholder="Location"
         isClearable
@@ -33,6 +34,7 @@ const SelectFilters = (props) => {
       />
       <ReactSelect
         className="react-select"
+        isLoading={data?.length === 0}
         options={[
           { label: "Active", value: "Active" },
           { label: "Inactive", value: "Inactive" },
